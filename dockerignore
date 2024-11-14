@@ -7,7 +7,7 @@
 Thumbs.db
 
 # Игнорировать файлы с конфиденциальной информацией
-*.env
+.env
 *Dockerfile
 *docker-compose.yml
 
