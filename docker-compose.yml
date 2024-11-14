@@ -1,0 +1,48 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: music_catalog_app
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/var/www/html
+        networks:
+            - app_network
+        depends_on:
+            - db
+
+    db:
+        image: mysql:8.0
+        container_name: music_catalog_db
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: music_catalog
+            MYSQL_USER: here add your username
+            MYSQL_PASSWORD: add your password
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - app_network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: music_catalog_phpmyadmin
+        environment:
+            PMA_HOST: db
+            PMA_USER: your username
+            PMA_PASSWORD: your password
+        ports:
+            - "8080:80"
+        depends_on:
+            - db
+        networks:
+            - app_network
+
+networks:
+    app_network:
+        driver: bridge
+
+volumes:
+    db_data:
