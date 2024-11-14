@@ -3,11 +3,12 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: music_catalog_app
+        container_name: music_catalog_aplication
         ports:
             - "8000:8000"
         volumes:
             - .:/var/www/html
+            - music_catalog_vendor:/var/www/html/vendor  # Separate volume for vendor
         networks:
             - app_network
         depends_on:
@@ -19,8 +20,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: rootpassword
             MYSQL_DATABASE: music_catalog
-            MYSQL_USER: here add your username
-            MYSQL_PASSWORD: add your password
+            MYSQL_USER: ****
+            MYSQL_PASSWORD: ****
         volumes:
             - db_data:/var/lib/mysql
         networks:
@@ -31,8 +32,8 @@ services:
         container_name: music_catalog_phpmyadmin
         environment:
             PMA_HOST: db
-            PMA_USER: your username
-            PMA_PASSWORD: your password
+            PMA_USER: ****
+            PMA_PASSWORD: ****
         ports:
             - "8080:80"
         depends_on:
@@ -46,3 +47,4 @@ networks:
 
 volumes:
     db_data:
+    music_catalog_vendor:
