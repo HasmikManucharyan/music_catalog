@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Music Catalog API",
+        "description": "API для работы с каталогом исполнителей, альбомов и песен",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/albums": {
+            "get": {
+                "tags": [
+                    "Альбомы"
+                ],
+                "summary": "Получить список альбомов",
+                "operationId": "fecc327f3f66131fee22f463f63e8645",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Album"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    }
+                }
+            }
+        },
+        "/api/artists": {
+            "get": {
+                "tags": [
+                    "Артисты"
+                ],
+                "summary": "Получить список исполнителей",
+                "operationId": "92a33a3fcf8eb4810bae501f2338302c",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Artist"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    }
+                }
+            }
+        },
+        "/api/songs": {
+            "get": {
+                "tags": [
+                    "Песни"
+                ],
+                "summary": "Песни",
+                "operationId": "6ef94dce9863a982960b517b4ba1c984",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Song"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Artist": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Имя исполнителя",
+                        "type": "string"
+                    },
+                    "albums": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Album"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Album": {
+                "required": [
+                    "title",
+                    "release_year"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Название альбома",
+                        "type": "string"
+                    },
+                    "release_year": {
+                        "description": "Год выпуска",
+                        "type": "integer"
+                    },
+                    "songs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Song"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Song": {
+                "required": [
+                    "title",
+                    "track_number"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Название песни",
+                        "type": "string"
+                    },
+                    "track_number": {
+                        "description": "Порядковый номер в альбоме",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Альбомы",
+            "description": "Альбомы"
+        },
+        {
+            "name": "Артисты",
+            "description": "Артисты"
+        },
+        {
+            "name": "Песни",
+            "description": "Песни"
+        }
+    ]
+}
